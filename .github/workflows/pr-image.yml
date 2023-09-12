@@ -27,7 +27,7 @@ jobs:
         with:
           images: slushpupie/test_docker_image
           tags: |
-            type=ref,event=pull_request
+            type=raw,value=pr-${{ github.event.issue.number }}
             type=sha
 
       - run: echo '${{ toJson(steps) }}'
