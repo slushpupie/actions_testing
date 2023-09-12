@@ -1,8 +1,6 @@
 name: Build PR Image
 
-on:
-  issue_comment:
-    types: [ created ]
+on: issue_comment
 
 jobs:
   build:
@@ -17,8 +15,8 @@ jobs:
     
     steps:
       
-      - name: Debug Step
-        run: echo ${{ toJson(github) }}
+      - run: echo '${{ toJson(github) }}'
+      - run: echo '${{ toJson(inputs) }}''
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -31,6 +29,8 @@ jobs:
           tags: |
             type=ref,event=pull_request
             type=sha
+
+      - run: echo '${{ toJson(steps) }}'
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
