@@ -8,6 +8,8 @@ jobs:
     docker:
         runs-on: ubuntu-latest
         steps:
+            - run: echo '${{ toJson(github) }}'
+
             - name: Set Docker metadata
               id: meta
               uses: docker/metadata-action@v4
@@ -17,11 +19,11 @@ jobs:
                   type=raw,value=pr-${{ github.event.pull_request.number }}
                   type=sha
 
-            - name: Cleanup
-              uses: docker/build-push-action@v2
-              with:
-                context: .
-                push: false
-                tags: ${{ steps.meta.outputs.tags }}
-                no-cache: true
-                remove: true
+            # - name: Cleanup
+            #   uses: docker/build-push-action@v2
+            #   with:
+            #     context: .
+            #     push: false
+            #     tags: ${{ steps.meta.outputs.tags }}
+            #     no-cache: true
+            #     remove: true
